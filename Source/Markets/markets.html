@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Markets</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"
+    />
+    <link rel="stylesheet" href="../common/index.css">
+
+    <!-- 引入 Vue 和 Vant 的 JS 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+</head>
+<body>
+    <div id="markets">
+        <ul class="title">
+            <li v-for="(item,index) in titleList" :key="index" :class="selVal == index ? 'sel' : ''" @click="changeTitle(index)">
+                {{item.name}}
+                <span :class="selVal == index ? 'sel_x' : ''"></span>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+var app = new Vue({
+    el: '#markets',
+    data: {
+        titleList:[
+                {
+                name:'Spot'
+                },
+                {
+                name:'ABT'
+                },
+                {
+                name:'NFT'
+                },
+                {
+                name:'Futures'
+                }
+        ],
+      selVal:0,
+      type:2
+    },
+    methods: {
+        changeTitle(index){
+            this.selVal = index
+        },
+    }
+})
+</script>
+<style>
+.title{
+  padding: 1.875rem .9375rem 1.25rem .9375rem;
+  display:flex;
+  background-color: #FFFFFF;
+  margin-bottom: 1.375rem;
+}
+.title>li{
+    width: 25%;
+    font-size: .9375rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.sel{
+    color: #2482FF;
+    font-weight: bold;
+}
+.sel_x{
+    position: absolute;
+    bottom: -1.25rem;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: 3.125rem;
+    border-bottom: 3px solid #2482FF;
+
+}
+::v-deep .van-row>.van-col:last-child{
+    text-align: end;
+}
+
+::v-deep .tit>.van-col:last-child{
+    display: flex;
+    justify-content: flex-end;
+}
+</style>

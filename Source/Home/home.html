@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"/>
+    <link rel="stylesheet" href="../Common/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script src="http://passport.cnblogs.com/scripts/jsencrypt.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+    <!-- <script src="../../js/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="../../js/swiper-bundle.min.css"
+    /> -->
+    <style>
+        /* .swiper-slide{
+            width: 100%;
+            height: 11.25rem;
+        }
+        .swiper-slide>img{
+            width: 100%;
+            height: 11.25rem;
+        } */
+    </style>
+</head>
+<body>
+    <div id="home">
+        
+        <van-swipe class="my-swipe"  indicator-color="white"  :autoplay="3000" :show-indicators="false" :touchable="false">
+            <van-swipe-item>
+                <img src="HomeImg/swiper.png" alt="">
+            </van-swipe-item>
+            <van-swipe-item>
+                <img src="HomeImg/swiper.png" alt="">
+            </van-swipe-item>
+        </van-swipe>
+        <!-- <div class="swiper mySwiper my-swipe">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="HomeImg/swiper.png" alt=""></div>
+              <div class="swiper-slide"><img src="HomeImg/swiper.png" alt=""></div>
+            </div>
+        </div> -->
+        <van-swipe class="h_my-swipe fff " vertical :autoplay="3000" :show-indicators="false" :touchable="false">
+            <van-swipe-item class="h_my-swipe_item">
+                <div class="dis_between p_rl_15 h_con" v-show="lang == 'zh'">
+                    一一一一一
+                    <img src="../Common/next.png" alt="">
+                </div>
+                <div class="dis_between p_rl_15 h_con" v-show="lang == 'en'">
+                    1111111111
+                    <img src="../Common/next.png" alt="">
+                </div>
+            </van-swipe-item>
+            <van-swipe-item>
+                <div class="dis_between p_rl_15 h_con">
+                    二二二二
+                    <img src="../Common/next.png" alt="">
+                </div>
+            </van-swipe-item>
+        </van-swipe>
+
+        <ul class="h_list">
+            <!--<li @click="markets" v-for="(item,index) in list" :key="index">
+                 <img :src='item.imgUrl' alt="">
+                <span class="h_name">{{item.name}}</span>
+            </li> -->
+            <li @click="markets">
+                <img src="HomeImg/NFT Market.png" alt="">
+                <span class="h_name" v-show="lang == 'zh'">一</span>
+                <span class="h_name" v-show="lang == 'en'">Crypto Market</span>
+            </li>
+            <li @click="NFTmarkets">
+                <img src="HomeImg/NFT Market.png" alt="">
+                <span class="h_name" v-show="lang == 'zh'">一</span>
+                <span class="h_name" v-show="lang == 'en'">Carbon Market</span>
+            </li>
+            <li ref="ABT">
+                <img src="HomeImg/ABT Issue.png" alt="">
+                <span class="h_name" v-show="lang == 'zh'">三</span>
+                <span class="h_name" v-show="lang == 'en'">ABT Market</span>
+            </li>
+            <li>
+                <img src="HomeImg/Earn&Finance.png" alt="">
+                <span class="h_name" v-show="lang == 'zh'">三</span>
+                <span class="h_name" v-show="lang == 'en'">NFT Market</span>
+            </li>
+            <li>
+                <img src="HomeImg/News.png" alt="">
+                <span class="h_name" v-show="lang == 'zh'">三</span>
+                <span class="h_name" v-show="lang == 'en'">Custody</span>
+            </li>
+            <li>
+                <img src="HomeImg/Rwswarch&Report.png" alt="">
+                <span class="h_name" v-show="lang == 'zh'">三</span>
+                <span class="h_name" v-show="lang == 'en'">ABN</span>
+            </li>
+            <li>
+                <img src="HomeImg/Referral.png" alt="">
+                <span class="h_name" v-show="lang == 'zh'">三</span>
+                <span class="h_name" v-show="lang == 'en'">Referral</span>
+            </li>
+            <li>
+                <img src="HomeImg/More.png" alt="">
+                <span class="h_name" v-show="lang == 'zh'">三</span>
+                <span class="h_name" v-show="lang == 'en'">ETF</span>
+            </li>
+        </ul>
+
+        <div class="h_otc dis_between fff m_b_10">
+            <div class="dis_between">
+                <div class="h_otc_name dis_center">
+                    <img src="HomeImg/OTC.png" alt="">
+                    OTC
+                </div>
+                <div class="h_buy">
+                    Quick Buy
+                </div>
+            </div>
+            <div>
+                <img src="../common/next.png" alt="">
+            </div>
+        </div>
+
+        <div class="h_market fff ">
+            <div class="h_market_name h_market_name_sel">Top Gainers</div>
+            <div class="h_market_name" >24h Vol</div>
+        </div>
+
+        <div class="fff">
+            <!-- <van-row justify="space-between" class="content_p fff">
+                <van-col span="15" class="menu"  @click="openMenu" >{{currency}}
+                    <img src="HomeImg/openMenu.png" alt="" :class="show ? 'openMenu' : 'closeMenu'">
+                </van-col>
+                <van-col span="5">Pric</van-col>
+                <van-col span="9">24h</van-col>
+               
+            </van-row> -->
+            <!-- <div class="overlay">
+                <van-row justify="space-between"  class="tit content_p" >
+                    <van-col span="15" class="name">
+                        111111
+                    </van-col>
+                    <van-col span="5" class="name">
+                        111111
+                    </van-col>
+                    <van-col span="9" >
+                        11
+                    </van-col>
+                </van-row>
+                <van-row justify="space-between"  class="tit content_p" >
+                    <van-col span="15" class="name">
+                        111111
+                      
+                    </van-col>
+                    <van-col span="5" class="name">
+                        111111
+                    </van-col>
+                    <van-col span="9" >
+                        11
+                     
+                    </van-col>
+                </van-row>
+                <van-row justify="space-between"  class="tit content_p" >
+                    <van-col span="15" class="name">
+                        111111
+                      
+                    </van-col>
+                    <van-col span="5" class="name">
+                        111111
+                    </van-col>
+                    <van-col span="9" >
+                        11
+                     
+                    </van-col>
+                </van-row>
+                <van-row justify="space-between"  class="tit content_p" >
+                    <van-col span="15" class="name">
+                        111111
+                      
+                    </van-col>
+                    <van-col span="5" class="name">
+                        111111
+                    </van-col>
+                    <van-col span="9" >
+                        11
+                     
+                    </van-col>
+                </van-row>
+                <van-row justify="space-between"  class="tit content_p" >
+                    <van-col span="15" class="name">
+                        111111
+                      
+                    </van-col>
+                    <van-col span="5" class="name">
+                        111111
+                    </van-col>
+                    <van-col span="9" >
+                        11
+                     
+                    </van-col>
+                </van-row>
+                <van-row justify="space-between"  class="tit content_p" >
+                    <van-col span="15" class="name">
+                        111111
+                      
+                    </van-col>
+                    <van-col span="5" class="name">
+                        111111
+                    </van-col>
+                    <van-col span="9" >
+                        11
+                     
+                    </van-col>
+                </van-row>
+                <van-overlay :show="show" @click="show = false">
+                    <ul class="wrapper" @click.stop>
+                        <li v-for="(item,index) in currencyList" :key="index"  @click="changeCurrency(item.name)"
+                        :class="currency == item.name ? 'wrapper_li wrapper_li_sel' : 'wrapper_li'"
+                        >{{item.name}}</li>
+                    </ul>
+                </van-overlay> 
+            </div>-->
+
+            <div class="dis_between content_p fff t">
+                <div style="width: 40%;">USD</div>
+                <div style="width: 40%;text-align: center;">Price</div>
+                <div style="width: 20%;">24h</div>
+            </div>
+            <ul>
+                <li class="dis_between list_li">
+                    <div style="width: 40%;">USD</div>
+                    <div class="price" style="width: 40%;text-align: center;">Price</div>
+                    <div class="hours dis_center" style="width: 20%;">+1.36%</div>
+                </li>
+                <li class="dis_between list_li">
+                    <div style="width: 40%;">USD</div>
+                    <div class="price" style="width: 40%;text-align: center;">Price</div>
+                    <div class="hours dis_center" style="width: 20%;">+1.36%</div>
+                </li>
+                <li class="dis_between list_li">
+                    <div style="width: 40%;">USD</div>
+                    <div class="price" style="width: 40%;text-align: center;">Price</div>
+                    <div class="hours dis_center" style="width: 20%;">+1.36%</div>
+                </li>
+                <li class="dis_between list_li">
+                    <div style="width: 40%;">USD</div>
+                    <div class="price" style="width: 40%;text-align: center;">Price</div>
+                    <div class="hours dis_center" style="width: 20%;">+1.36%</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- <script src="../../js/swiper-bundle.min.js"></script> -->
+    <script>
+        let langCn = {
+            a:"ssad"
+        };
+
+        let langEn = {
+            a:"ssad"
+        };
+
+        let la
+        // var swiper = new Swiper(".mySwiper", {
+            // direction: 'horizontal', // 垂直切换选项
+            // loop: true, // 循环模式选项
+            // speed:'1000',
+            // autoplay:{
+                // delay:3000
+            // }
+        // });
+    </script>
+   <script src="../../js/checkSystem.js"></script>
+</body>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script> -->
+
+<script>
+    var app = new Vue({
+        el: '#home',
+        data: {
+            // type:false
+            show: false,
+            currencyList:[
+                {
+                    name:'USD'
+                },
+                {
+                    name:'SGD'
+                },
+                {
+                    name:'EUR'
+                },
+            ],
+            currency:'USD',
+            // wsTicker:{
+            //     sub: "/markets/ticker",
+            //     applicationID: "",
+            // },
+            list:[],
+            dataform:[],
+            bannerList:[],
+            lang:'en',
+            system:''
+        },
+        created () {
+          
+        },
+        mounted () {
+            // this.getWebSocketUrl();
+            // this.getbannerList()
+            
+            localStorage.setItem('lang','en')
+            this.checkSystem();
+            if(this.system == 'ios'){
+                setInterval(function(){
+                    if(window.webkit.messageHandlers != null){
+                        window.webkit.messageHandlers.getUserInfo.postMessage({});
+                        return
+                    }else{
+                        alert('error')
+                    }
+                },300)
+                console.log('window',window)
+            }else if(this.system == 'isAndroid'){
+
+            }
+            window.changeLanguage = this.changeLanguage()
+            window.getUserInfoFromPhone = this.getUserInfoFromPhone()
+
+            console.log('执行',)
+        },
+        methods: {
+            checkSystem() {
+                var u = window.navigator.userAgent, app = window.navigator.appVersion;
+                var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+                var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+                console.log('isAndroid',isIOS, isAndroid)
+                if (isAndroid) {
+                    this.system = 'isAndroid'
+                }
+                if (isIOS) {
+                    this.system = 'ios'
+                }
+            },
+            changeLanguage(lang){
+                this.lang = lang
+                console.log("获取到的参数:" + lang);
+            },
+            changeColor(parameter){
+                // let parameter ={"action":"", parameter:{}}
+                this.$ref.ABT = parameter
+            },
+            openMenu(){
+                this.show = !this.show
+            },
+            changeCurrency(currency){
+                this.currency = currency
+                this.show = false
+            },
+
+            getbannerList(){
+                this.bannerList = []
+                let data = {'debug':2}
+                if(window.location.origin.indexOf('mock') != -1){
+                    data = {'debug':1}
+                }
+                axios.get('http://localhost:9042/api/banner/getActiveBannerList',{
+                    params: data
+                }).then(response => {
+                    console.log('response',response)
+                })
+            },
+
+            getWebSocketUrl() {
+                sportTrading.getWebSocketUrl(response => {
+                    this.webSocketUrl = response
+                    this.getApplicationId()
+                },{})
+            },
+            getApplicationId() {
+                sportTrading.getApplicationId(response => {
+                    this.applicationId = response
+                    this.requestWs();
+                },{})
+            },
+
+            markets(){
+                window.webkit.messageHandlers.jsToPhoneNoParams.postMessage({});
+            },
+            getUserInfo(){
+                window.webkit.messageHandlers.getUserInfo.postMessage({});
+            },
+            getUserInfoFromPhone(data){
+                if(data.language == 'en'){
+                    this.lang = 'en'
+                }else if(data.language == 'zh'){
+                    this.lang = 'zh'
+                }
+            },
+            NFTmarkets(){
+                window.webkit.messageHandlers.jsToPhoneWithParams.postMessage({"actions":"",params:{"":""}});
+            }
+            
+        }
+    })
+    function phoneToJs(params){
+        document.body.style.backgroundColor = randomColor();
+        window.webkit.messageHandlers.jsToPhoneWithParams.postMessage({"params":params});
+        document.getElementsByClassName
+    }
+    // function markets(){
+    //     window.webkit.messageHandlers.jsToPhoneNoParams.postMessage({});
+    // }
+    // function NFTmarkets(){
+    //     window.webkit.messageHandlers.jsToPhoneWithParams.postMessage({"params":"我是参数"});
+    // }
+    function randomColor()
+    {
+        var r=Math.floor(Math.random()*256);
+        var g=Math.floor(Math.random()*256);
+        var b=Math.floor(Math.random()*256);
+        return "rgb("+r+','+g+','+b+")";//所有方法的拼接都可以用ES6新特性`其他字符串{$变量名}`替换
+    }
+</script>
+<style>
+.t{
+    color: #B4B5BC;
+    font-size: .75rem;
+    padding: .625rem .9375rem;
+}
+.list_li{
+    padding: .625rem .9375rem;
+}
+
+.price{
+    font-size: .9375rem;
+    font-family: Arial-BoldMT, Arial;
+    font-weight: bold;
+    color: #3A3A3A;
+}
+.hours{
+    width: 4rem;
+    height: 1.875rem;
+    border-radius: .125rem;
+    background-color: #EAF7EF;
+    color: #25B097;
+    font-size: .9375rem;
+    font-family: ArialMT;
+}
+
+
+#home{
+    background-color: #EEF1F5;
+}
+
+
+.my-swipe {
+    width: 100%;
+    margin: 0rem 0 .625rem;
+}
+.van-swipe-item >img {
+    width: 46.875rem;
+    height: 11.25rem;
+}
+.van-swipe-item>img{
+    width: 100%;
+    height: 100%;
+} 
+.h_my-swipe{
+    height: 3.0625rem;
+    margin-bottom: .625rem;
+}
+
+.h_con{
+    font-size: .6875rem;
+    color: #626D7C;
+    border-left: .1875rem solid #1678FF;
+    margin-left: 1.03125rem;
+    margin: 1.2375rem 0 .9375rem 1.0625rem;
+}
+/* .van-row:first-child{
+    padding: .9375rem 0 0;
+} */
+/* .van-popover__arrow{
+    left: 16%;
+} */
+.red{
+    color:red
+}
+.van-row>.van-col:last-child{
+    text-align: end;
+    padding: 0 .9375rem 0 0;
+}
+.van-row>.van-col:first-child{
+    padding: 0 0 0 .9375rem;
+}
+.overlay{
+    position: relative;
+}
+
+.tit>.van-col:last-child{
+    display: flex;
+    justify-content: flex-end;
+}
+.van-popover .van-popover__arrow{
+    left: 15% !important;
+}
+.van-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.19);
+}
+.wrapper{
+    padding: 1.125rem .9375rem 1.3125rem;
+    background-color: #ffffff;
+    display: flex;
+    border-radius: 0 0 .625rem .625rem;
+    border-top: .0625rem solid #EBEBEB;
+}
+.wrapper_li{
+    padding: .4375rem 2.4375rem;
+    background-color: #EEF1F5;
+    font-size: .75rem;
+    color: #3A3A3A;
+    margin-right: 1.0625rem;
+    border-radius: .3125rem;
+}
+.wrapper_li_sel{
+    background-color: #ffffff;
+    border: .0625rem solid #2482FF;
+    color: #2482FF;
+}
+.menu{
+    display: flex;
+    align-items: center;
+}
+.menu>img{
+    margin-left: .5rem;
+}
+.openMenu{
+    transform:rotate(180deg);
+    transition-duration: .5s;
+}
+.closeMenu{
+    transform:rotate(0deg);
+    transition-duration: .5s;
+}
+</style>
+</html>

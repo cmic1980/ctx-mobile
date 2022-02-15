@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Markets</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"
+    />
+    <link rel="stylesheet" href="../../Common/index.css">
+
+    <!-- 引入 Vue 和 Vant 的 JS 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+</head>
+<body>
+    <div id="home_markets">
+        <div class="content_p">
+            <van-row justify="space-between" v-if="type == 1">
+              <van-col span="15">
+                  <van-popover
+                    v-model="showPopover"
+                    trigger="click"
+                    :actions="currencyList"
+                    @select="onSelect"
+                    >
+                        <template #reference>
+                            <div >
+                                {{currency}}
+                                <van-icon name="arrow-down" />
+                            </div>
+                        </template>
+                    </van-popover>
+              </van-col>
+              <van-col span="5">Pric</van-col>
+              <van-col span="9">24h</van-col>
+            </van-row>
+            <van-row justify="space-between" v-if="type == 2">
+              <van-col span="15">Instruments</van-col>
+              <van-col span="5">Price(SGD)</van-col>
+              <van-col span="9">24h change</van-col>
+            </van-row>
+            <van-row justify="space-between"  class="tit" v-for="(item,index) in list" :key="index" >
+              <van-col span="15" class="name">
+                <img class="icon" v-if="item.symbol1 == 'BTC'" src="../../assets/img/BTC.png" alt="">
+                <img class="icon"  v-if="item.symbol1 == 'ETH'" src="../../assets/img/ETH.png" alt="">
+                <img class="icon"  v-if="item.symbol1 == 'CNT'" src="../../assets/img/CNT.png" alt="">
+                <img class="icon"  v-if="item.symbol1 == 'USDT'" src="../../assets/img/USDT.png" alt="">
+                {{item.symbol == null ? '' : item.symbol}}
+              </van-col>
+              <van-col span="5" class="name">{{item.lastPx == null ? '' :  '$' + item.lastPx}}</van-col>
+              <van-col span="9" >
+                <div v-if="item.pxChangePercent >= 0" :class="item.pxChangePercent >= 0 ? 'green' : ''">
+                  {{item.pxChangePercent == null ? 0 : item.pxChangePercent == 0 ? '0' : '+'+item.pxChangePercent}}%
+                </div>
+                <div v-if="item.pxChangePercent < 0" :class="item.pxChangePercent < 0 ? 'green red' : ''">
+                  {{item.pxChangePercent == null ? 0 : item.pxChangePercent}}%
+                </div>
+              </van-col>
+            </van-row>
+          </div>
+    </div>
+</body>
+<script>
+var app = new Vue({
+    el: '#home_markets',
+    data: {
+        
+    }
+})
+</script>
+<style>
+
+</style>
